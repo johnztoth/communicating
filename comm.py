@@ -9,6 +9,9 @@ The agent must stay within the bounds of the environment.
 As the agent moves it eats the environment, 10 units at a time.
 If there are less than 10 environment units left the agent eats them all.
 If the agent eats more than 100 units it sicks them up where it is.
+If an agent comes within a predefined distance of another agent they share their store.
+The number of agents, number of iterations, and neighbourhood distance are
+input as command line arguments.
 Plot the final agent positions and the environment data.
 """
 
@@ -45,8 +48,8 @@ reader = csv.reader(f, quoting=csv.QUOTE_NONNUMERIC)
 for row in reader:     # A list of rows
     rowlist=[]
     for value in row:  # A list of value
-        # rowlist.append(value)
-        rowlist.append(100)  # test environment
+        rowlist.append(value)
+        # rowlist.append(100)  test environment
     environment.append(rowlist)
 f.close() 
 
@@ -56,9 +59,11 @@ for i in range(num_of_agents):
     agents.append(agentframework.Agent(environment,agents))
 
 """ Move the agents using the move method and eat the environment """
+""" if two agents are closer than 'neighnourhood' share the store """
+""" shuffle the agents for each iteration to avoid model artifacts """
 for j in range(num_of_iterations):
-    # random.shuffle(agents)
-    shuffled = random.sample(agents,len(agents))
+    # random.shuffle(agents)  shuffle in place
+    shuffled = random.sample(agents,len(agents)) # create a new shuffled list
     for i in range(num_of_agents):
         shuffled[i].move()
         shuffled[i].eat()
@@ -81,13 +86,18 @@ for row in environment:
 f.close()
 """
 
-""" write how much all the agents have eaten """
-total=0.0
-f=open("store.txt","a")
+
+""" write how much all the agents have stored and shared """
+
+g = open("store.txt","a")
+
+totalstore = 0.0
+
 for agent in agents:
-    total=total+agent.store    
-print(total,file=f)
-f.close()
+    totalstore += agent.store 
+print(neighbourhood, totalstore, file=g)
+
+g.close()
 
 
 

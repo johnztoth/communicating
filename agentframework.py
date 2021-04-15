@@ -18,7 +18,7 @@ class Agent():
         self.agents = agents
         self.store = 0 
         
-        
+         
     def move(self):
         """ randonly move the agent by one unit in x and y direction """
         """ keeping within boundaries """
@@ -53,14 +53,14 @@ class Agent():
         """ calculate distance to all other agents """
         """ if this distance is less than neighbourhood share the store """
         for agent in self.agents:
-            if agent is not self:  # do not share with same agent
+            if agent is not self:  # agent does not share with itself
                 distance = self.distance_between(agent)
                 if distance <= neighbourhood:
                     average=(self.store + agent.store)/2.0
-                    self.store=average
-                    agent.store=average
+                    self.store = average
+                    agent.store = average
 
-        
+
     def distance_between(self,agent):
         """ function to determine distance between two agents """
         dy=self._y-agent._y
@@ -69,6 +69,7 @@ class Agent():
 
     def __str__(self) :
         """ override print to print agents location and store """
+        """ PS this works in the iPython console but not in the command shell? """
         return ("y= " + str(self._y) + " x= " + str(self._x)\
                 + " store= " + str(self.store))
 
