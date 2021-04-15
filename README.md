@@ -1,6 +1,6 @@
 # communicating
 
-In this model we add sharing. If an agent comes within a predefined distance,
+In this model we add sharing. If an agent comes within a predefined distance
 (the neighbourhood) to any other agent then they both share their total store.
 The agents are shuffled before each iteration to avoid any unwanted effects
 due to the running order (model artifacts).
