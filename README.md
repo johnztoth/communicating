@@ -13,4 +13,5 @@ The program to run in batch mode using subprocess.call() is in sprocess.py.
 To run in batch mode type> python sprocess.py
 
 To run a single program type> python comm.py 10 100 20
+
 ...that is with 10 agents, 100 iterations, and a neighbourhood of 20
